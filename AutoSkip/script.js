@@ -10,15 +10,11 @@ function singleton(htmlCollection) {
 }
 
 setInterval(function() {
-	var skipDiv = singleton(document.getElementsByClassName("skip-credits"));
-	if (!skipDiv) {
+	var skipButton = singleton(document.getElementsByClassName("watch-video--skip-content-button"));
+	if (!skipButton) {
 		return;
 	}
-	var skipA = singleton(skipDiv.getElementsByTagName("a"))
-	if (!skipA) {
-		return;
-	}
-	skipA.click();
+	skipButton.click();
 }, interval);
 
 })(window, document);
