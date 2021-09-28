@@ -3,17 +3,8 @@
 <head>
 	<title>Auto HD for YouTube (OpenSource)</title>
 
-	<!-- <link rel="stylesheet" href="css/bootstrap.min.css" >
-	<link rel="stylesheet" href="css/bootstrap-theme.min.css" >
-	<link rel="stylesheet" href="css/main.css" > -->
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
+	<link rel="stylesheet" href="bootstrap.min.css">
 	<link rel="stylesheet" href="options.css">
-
 </head>
 <body>
 <div class="container">
@@ -22,18 +13,27 @@
 
 	<h3>Check project at <a href="https://github.com/peter-lang/autoskip-netflix/" target="_blank">GitHub</a></h3>
 
+	<button type="button" id="restore-defaults" class="btn btn-primary">Restore defaults</button>
+
 	<form role="form" class="form-vertical">
-		
 		<div class="form-group">
-			<label for="try-interval">Skip Try Interval <div id="nfas_interval_saved" class="label label-success info-showup info-hide">Saved</div></label>
-			<select id="nfas_interval" class="form-control">
-				<option value="500">0.5 sec</option>
-				<option value="1000">1 sec</option>
-				<option value="2000">2 sec</option>
-				<option value="5000">5 sec</option>
-			</select>
+				<label for="nfas_interval">Skip Try Interval</label><span id="nfas_interval_saved" class="badge badge-success info-showup info-hide">Saved</span>
+				<select id="nfas_interval" class="form-control">
+					<option value="500">0.5 sec</option>
+					<option value="1000">1 sec</option>
+					<option value="2000">2 sec</option>
+					<option value="5000">5 sec</option>
+				</select>
+				<span class="help-block">
+					Background script checks every X second if there is a Skip Intro button to click.
+				</span>
+			</div>
+		</form>
+		<div class="form-group">
+			<label for="nfas_xpath">XPath for "Skip Intro" button</label><span id="nfas_xpath_saved" class="badge badge-success info-showup info-hide">Saved</span>
+			<input id="nfas_xpath" class="form-control">
 			<span class="help-block">
-				Background script checks every X second if there is a Skip Intro button to click.
+				XPath to find "Skip Intro" button. Do not change it unless you are sure, what you are doing.
 			</span>
 		</div>
 	</form>

@@ -1,20 +1,28 @@
-(function(window, document) {
-var nfas_config = window.nfas_config || {};
-var interval = nfas_config.nfas_interval || 1000;
+(async function(document, storage) {
 
-function singleton(htmlCollection) {
-	if (htmlCollection && htmlCollection.length === 1) {
-		return htmlCollection[0];
-	}
-	return undefined;
-}
+  function getOptions() {
+    return new Promise((resolve, reject) => {
+      storage.get({
+        "nfas_interval": 1000,
+        "nfas_xpath": "//button[contains(@class, 'watch-video--skip-content-button')]"
+      }, function (items) {
+        if (chrome.runtime.lastError) {
+          return reject(chrome.runtime.lastError);
+        }
+        resolve(items);
+      });
+    });
+  }
 
-setInterval(function() {
-	var skipButton = singleton(document.getElementsByClassName("watch-video--skip-content-button"));
-	if (!skipButton) {
-		return;
-	}
-	skipButton.click();
-}, interval);
+  let options = await getOptions();
 
-})(window, document);
+  setInterval(function() {
+    let result = document.evaluate(options.nfas_xpath, document);
+    var button = result.iterateNext();
+    while (button) {
+      button.click();
+      button = result.invalidIteratorState ? null : result.iterateNext();
+    }
+  }, options.nfas_interval);
+
+})(document, chrome.storage.sync);
